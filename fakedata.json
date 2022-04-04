@@ -1,0 +1,597 @@
+{
+    "cuisines":[
+        {
+            "name":"National Picks",
+            "image":"https://cdn.pixabay.com/photo/2017/12/09/23/04/bread-3008949__340.jpg"
+        },
+        {
+            "name":"Lunch Specials",
+            "image":"https://cdn.pixabay.com/photo/2015/05/11/11/46/fried-rice-762362__340.jpg"
+        },
+        {
+            "name":"Sandwiches",
+            "image":"https://cdn.pixabay.com/photo/2016/03/05/20/02/appetizer-1238615__340.jpg"
+        },
+        {
+            "name":"Salads",
+            "image":"https://cdn.pixabay.com/photo/2017/09/16/19/21/salad-2756467__340.jpg"
+        },
+        {
+            "name":"Healthy",
+            "image":"https://cdn.pixabay.com/photo/2017/06/02/18/24/fruit-2367029__340.jpg"
+        },
+        {
+            "name":"Hamburguer",
+            "image":"https://cdn.pixabay.com/photo/2017/02/09/14/09/kebab-2052491__340.jpg"
+        },
+        {
+            "name":"Wraps",
+            "image":"https://cdn.pixabay.com/photo/2019/08/15/10/46/burrito-4407736__340.jpg"
+        },
+        {
+            "name":"Coffee and Tea",
+            "image":"https://cdn.pixabay.com/photo/2016/01/19/17/56/coffee-1149983__340.jpg"
+        },{
+            "name":"Latino",
+            "image":"https://cdn.pixabay.com/photo/2016/04/28/21/48/mexican-food-1359817__340.jpg"
+        },{
+            "name":"Asian",
+            "image":"https://cdn.pixabay.com/photo/2015/04/10/00/41/food-715542__340.jpg"
+        }
+    ],
+    "restaurants":[
+        {
+            "name":"Tacos Mexico",
+            "cuisines":[{"name":"Wraps"},{"name":"Sandwiches"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"PimPollo",
+            "cuisines":[{"name":"Lunch Specials"},{"name":"Latino"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"Veggy House",
+            "cuisines":[{"name":"Healthy"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"Chin Tsu Woo",
+            "cuisines":[{"name":"Salads"},{"name":"Asians"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"KFC",
+            "cuisines":[{"name":"Wraps"},{"name":"Sandwiches"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"Denny's",
+            "cuisines":[{"name":"Wraps"},{"name":"Sandwiches"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"Paris Baguette",
+            "cuisines":[{"name":"Wraps"},{"name":"Sandwiches"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name":"Kennedy Chicken",
+            "cuisines":[{"name":"Wraps"},{"name":"Sandwiches"}],
+            "image":"https://cdn.pixabay.com/photo/2017/08/04/14/33/food-2580200__340.jpg",
+            "address_1":"32-11 Junction Blvd",
+            "address_2":"East Elmhurst, NY 11369-2453",
+            "restaurant_cat":[
+                {
+                    "name":"Most Popular",
+                    "descripcion":"",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99,
+                            
+                        },
+                        {
+                            "name":"Buttermilk Pancakes",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653__340.jpg",
+                            "price": 13.99
+                        }
+                    ]
+                },
+                {
+                    "name":"Breakfast",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"https://cdn.pixabay.com/photo/2012/05/26/15/27/sandwich-49244__340.jpg",
+                            "price": 4.50
+                        }
+                    ]
+                },
+                {
+                    "name":"Omelettes",
+                    "descripcion":"Served all day 6.00 am to 4 pm",
+                    "products":[
+                        {
+                            "name":"2 egg sandwich",
+                            "image":"https://cdn.pixabay.com/photo/2018/07/15/10/03/fried-3539263__340.jpg",
+                            "price": 5.99
+                        },
+                        {
+                            "name":"challah french toast",
+                            "image":"https://cdn.pixabay.com/photo/2015/10/19/06/13/french-toast-995532__340.jpg",
+                            "price": 13.99
+                        },
+                        {
+                            "name":"Grilled cheese",
+                            "image":"",
+                            "price": 4.50
+                        }
+                    ]
+                }
+            ]
+
+        }
+    ] 
+
+}

@@ -1,0 +1,25 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+      "max-line-length": {
+        "options": [100]
+      },
+      "member-ordering": false,
+      "no-consecutive-blank-lines": false,
+      "object-literal-sort-keys": false,
+      "ordered-imports": false,
+      "quotemark": false,
+      "no-console":false,
+      "comment-format":false,
+      "no-unused-expression":false,
+      "no-trailing-whitespace":false,
+      "variable-name": [true, "allow-leading-underscore"],
+      "no-string-literal":false
+    },
+    "linterOptions": {
+      "exclude": [
+        "node_modules",
+        "webpack.config.ts"
+      ]
+    }
+  }

@@ -1,0 +1,7 @@
+{
+    "mongoURI": "mongodb://cristianscript:hODo4SNifmTqRMZQ@cluster0-shard-00-00-wlrrk.mongodb.net:27017,cluster0-shard-00-01-wlrrk.mongodb.net:27017,cluster0-shard-00-02-wlrrk.mongodb.net:27017/latintropic?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "jwtSecret": "secretTokenScriptEncription",
+    "githubClientId":"72d5590385be79026f19",
+    "githubClientSecret":"14626bc1eea9871d279dab8c8b38942e1f2cadfb"
+ }
+ 
