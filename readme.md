@@ -6,4 +6,4 @@
 
 **npm run start:dev**
 
->$copy, Enjoy
+>&copy; Enjoy
