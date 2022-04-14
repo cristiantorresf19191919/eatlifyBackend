@@ -6,16 +6,14 @@ import { IProductos } from './Productos';
 type ID = Types.ObjectId;
 
 export interface IRestaurant extends Document{
-  
     name:string;
-    user:ID | IUser;    
-    address:string;
+    user?:ID | IUser;    
+    address?:string;
+    email:string;
+    password:string;
     description?: string; 
     phone: string;
-    image?:{
-        id:string,
-        url:string
-    };
+    image?:{id:string,url:string};
     productos?: IProductos[];   
     ventas?:[]
 }
@@ -26,6 +24,14 @@ const RestaurantSchema = new Schema({
         ref:'Cajero'
     },
     name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
         type:String,
         required:true
     },
@@ -65,4 +71,4 @@ const RestaurantSchema = new Schema({
 
 })
 
-export default mongoose.model<IRestaurant>('Restaurant',RestaurantSchema);
+export default mongoose.model<IRestaurant>('Restaurants',RestaurantSchema);

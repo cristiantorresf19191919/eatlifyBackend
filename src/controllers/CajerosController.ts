@@ -3,9 +3,11 @@ import Cajero from "../models/Cajero";
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcryptjs";
 import * as config from "config";
+import { RestaurantService } from "src/services/restaurant.service";
 const db = "secretTokenScriptEncription";
 
 export class CajerosController {
+ 
   public async verCajeros(req: Request, res: Response) {
     res.send("hola pedejo");
   }

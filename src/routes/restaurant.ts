@@ -44,6 +44,10 @@ class RestaurantRoute {
       this.restaurantController.saveRestaurant
     );
     this.router.post(
+      "/login",
+      this.restaurantController.login
+    );
+    this.router.post(
       "/uploadPic/:productId",
       this.seguridad.adminAuthenticated,
       this.seguridad.isadmin,

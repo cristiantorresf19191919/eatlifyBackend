@@ -1,7 +1,8 @@
-import { Response, Request, NextFunction } from "express";
-import Restaurant from "../models/Restaurantes";
-import { IRestaurant } from '../models/Restaurantes';
+import { Request, Response } from "express";
+import {RestaurantService} from "../services/restaurantService"
+import Restaurant, { IRestaurant } from "../models/Restaurantes";
 import { TokenRequest } from './TokenRequestInterface';
+
 
 export interface RequestModified {  
   file?:{
@@ -13,6 +14,12 @@ export interface RequestModified {
 type RequestPersonalized = Request & TokenRequest;
 
 export class RestaurantController {
+
+  private restaurantService: RestaurantService =  new RestaurantService();
+
+  async login(req: RequestPersonalized, res: Response){
+    return res.status(200).json(this.restaurantService.login(res,req.body as IRestaurant));
+  }   
 
   async uploadPic(req: RequestPersonalized, res: Response) {
     try {
