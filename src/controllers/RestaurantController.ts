@@ -4,11 +4,11 @@ import Restaurant, { IRestaurant } from "../models/Restaurantes";
 import { TokenRequest } from './TokenRequestInterface';
 
 
-export interface RequestModified {  
+export interface RequestModified {
   file?:{
     url?:string
     public_id?:string
-    
+
   }
 }
 type RequestPersonalized = Request & TokenRequest;
@@ -19,11 +19,13 @@ export class RestaurantController {
 
   async login(req: RequestPersonalized, res: Response){
     return res.status(200).json(this.restaurantService.login(res,req.body as IRestaurant));
-  }   
+  }
 
   async uploadPic(req: RequestPersonalized, res: Response) {
+    const {productId} = req.params;
+    if (!productId) return res.status(400).send('productId is required');
     try {
-      console.log('llego el archivo que queria si o no carajo');
+      console.log('😊Testing file');
       console.log(req.file);
       const imageCloud = {
         url: req.file.path,
@@ -31,14 +33,16 @@ export class RestaurantController {
       };
       /* return updated item {"new":true} */
       const restaurant = await Restaurant.findByIdAndUpdate(
-        req.params.productId,
+        productId,
         { $set: { image: imageCloud } },
         { new: true }
       );
       if (restaurant) return res.status(202).json(restaurant);
     } catch (error) {
-      console.error(error.message);
-      return res.status(500).send(error.message);
+      //delete that record from DB
+      await Restaurant.findByIdAndDelete(productId);
+      console.log(JSON.stringify(error.message));
+      return res.status(200).send(JSON.stringify(error.message));
     }
   }
 
@@ -51,7 +55,7 @@ export class RestaurantController {
       //consulta en la base de datos y devuelve con el mismo id de
       // usuario
       const restaurant = await Restaurant.find({
-        
+
         user: user_id,
       });
       return res.status(202).json(restaurant);
@@ -66,7 +70,7 @@ export class RestaurantController {
 
       let a :IRestaurant;
       let user = req.user.id;
-      const { name, address, description, phone } = req.body;
+      const { name, address, description, phone, email, password } = req.body;
       const ya_existe_restaurante = await Restaurant.findOne({
         name: name,
       });
@@ -77,7 +81,7 @@ export class RestaurantController {
       if (ya_existe_restaurante)
         return res.status(404).json({ msg: "el restaurante ya existe" });
       const restaurante = new Restaurant({ name, address, description, phone, user });
-    
+
       const exito = await restaurante.save();
       if (exito) res.status(200).json(exito);
     } catch (error) {
@@ -102,17 +106,17 @@ export class RestaurantController {
   }
 
   async updateRestaurant(req: RequestPersonalized, res: Response) {
-    try {    
+    try {
       const { name, address, description, phone } = req.body;
       // el backend recive el id del post
       // lo encuentra
       const restaurant = await Restaurant.findById(req.params.id);
       // actualiza el objeto
-      restaurant.name = name;     
+      restaurant.name = name;
       restaurant.description = description;
       restaurant.address = address;
       restaurant.phone = phone;
-    
+
       let response = await restaurant.save();
       res.json(response);
     } catch (error) {

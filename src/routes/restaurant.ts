@@ -1,5 +1,5 @@
 import { Request, Response, Router, NextFunction } from "express";
-import { CajerosController } from "../controllers/CajerosController";
+import { CashiersController } from "../controllers/CashiersController";
 import { Authenticated } from "../middlewares/authenticated";
 import { RestaurantController } from '../controllers/RestaurantController';
 import {CloudinaryStorage} from 'multer-storage-cloudinary';
@@ -20,12 +20,11 @@ class RestaurantRoute {
     this.routes();
   }
   configCloduinary() {
-    // configurando librerias para subir imagenes
-    
+
     this.cloudinary.v2.config({
-      cloud_name: "dzkewxe2v",
-      api_key: "335177668663129",
-      api_secret: "i-8zhI9fU4BYQXo8v95mH2hNjsk",
+      cloud_name: process.env.CLOUDINARY_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_SECRET,
     });
     const storage = new CloudinaryStorage({
       cloudinary: this.cloudinary.v2,
@@ -34,9 +33,10 @@ class RestaurantRoute {
         allowed_formats: ['jpg','png'],
         transformation: [{width:500, height:500, crop:'limit'}]
       })
-    })  
+    })
     this.parser = multer({storage});
   }
+
   routes() {
     this.router.post(
       "/",
@@ -57,7 +57,6 @@ class RestaurantRoute {
     this.router.delete(
       "/:id",
       this.seguridad.adminAuthenticated,
-      this.seguridad.isadmin,
       this.seguridad.isadmin,
       this.restaurantController.deleteRestaurant
     );

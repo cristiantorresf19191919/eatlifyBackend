@@ -8,6 +8,8 @@
       "sourceMap": true,
       "outDir": "dist",
       "baseUrl": ".",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
     //   "types": ["node", "express","socket.io"],
       "plugins": [
         {

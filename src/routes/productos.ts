@@ -1,5 +1,5 @@
 import { Request, Response, Router, NextFunction } from "express";
-import { CajerosController } from "../controllers/CajerosController";
+import { CashiersController } from "../controllers/CashiersController";
 import { Authenticated } from "../middlewares/authenticated";
 import { ProductsController } from "../controllers/ProductsController";
 
@@ -35,7 +35,7 @@ class ProductosRoutes {
     );
     this.router.get("/",this.seguridad.adminAuthenticated,this.productosController.verProducto);
     this.router.get("/:id",this.seguridad.adminAuthenticated,this.productosController.getProductById);
-    
+
   }
 }
 const productosRoutes: ProductosRoutes = new ProductosRoutes();

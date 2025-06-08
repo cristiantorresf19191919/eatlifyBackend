@@ -7,31 +7,23 @@ type ID = Types.ObjectId;
 
 export interface IRestaurant extends Document{
     name:string;
-    user?:ID | IUser;    
+    user?:ID | IUser;
     address?:string;
     email:string;
     password:string;
-    description?: string; 
+    description?: string;
     phone: string;
     image?:{id:string,url:string};
-    productos?: IProductos[];   
+    productos?: IProductos[];
     ventas?:[]
 }
 const Schema = mongoose.Schema;
-const RestaurantSchema = new Schema({  
+const RestaurantSchema = new Schema({
     user:{
         type: Schema.Types.ObjectId,
         ref:'Cajero'
     },
     name:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
-    },
-    password:{
         type:String,
         required:true
     },
@@ -47,7 +39,7 @@ const RestaurantSchema = new Schema({
         url:String
     },
     productos: [
-        {   
+        {
             name:{type: String},
             topProduct:{type: Boolean},
             description:{type: String},
@@ -66,8 +58,8 @@ const RestaurantSchema = new Schema({
             date: {type: Date, default: Date.now}
         }
     ]
-    
-  
+
+
 
 })
 

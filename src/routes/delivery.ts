@@ -16,11 +16,10 @@ class DeliveryRouter {
     this.routes();
   }
   configCloduinary() {
-    // configurando librerias para subir imagenes    
     this.cloudinary.v2.config({
-      cloud_name: "dzkewxe2v",
-      api_key: "335177668663129",
-      api_secret: "i-8zhI9fU4BYQXo8v95mH2hNjsk",
+      cloud_name: process.env.CLOUDINARY_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_SECRET,
     });
     const storage = new CloudinaryStorage({
       cloudinary: this.cloudinary.v2,
@@ -29,7 +28,7 @@ class DeliveryRouter {
         allowed_formats: ['jpg','png'],
         transformation: [{width:500, height:500, crop:'limit'}]
       })
-    })  
+    })
     this.parser = multer({storage});
   }
   routes() {

@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
-const WebpackShellPlugin = require('webpack-shell-plugin');
+// const WebpackShellPlugin = require('webpack-shell-plugin');
 require('dotenv').config()
 const {NODE_ENV = 'production'} = process.env;
 console.log("🚀🚀🚀🚀 NODE_ENV", NODE_ENV)
@@ -33,9 +33,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(),
-  new WebpackShellPlugin({
-    onBuildEnd: ['npm run run:dev']})
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 
 };

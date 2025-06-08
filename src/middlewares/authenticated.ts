@@ -69,16 +69,17 @@ export class Authenticated {
     }
     // Verificar Token
     try {
-      const clave = "secretTokenScriptEncription"; 
-      const decoded = jwt.verify(token, clave);
-      req.user = decoded.user;
+        const secret = process.env.SECRET;
+        const decoded = jwt.verify(token, secret);
+        req.user = decoded.user;
       if (decoded.user.admin) {
         next();
       }
     } catch (err) {
+      console.log("AUTH ERRor 😩😩😩😩😩😩");
       console.error(err.message);
       res.status(500).json({
-        msg: "el tiempo del token ha expirado",
+        msg: `el tiempo del token ha expirado ${err.message}`,
       });
     }
   }
@@ -86,9 +87,10 @@ export class Authenticated {
   isadmin(req, res, next) {
     const token = req.header("Authorization");
     try {
-      const clave = "secretTokenScriptEncription";
-      const decoded = jwt.verify(token, clave);
-      if (decoded.user.admin) {
+      const secrets = process.env.SECRET;
+      const decoded = jwt.verify(token, secrets);
+      console.log(decoded)
+      if (decoded.user.admin || decoded.user.superuser) {
         /* es admin y tiene permisos */
         console.log("usuario admin haciendo peticiones");
         next();
@@ -99,7 +101,7 @@ export class Authenticated {
     } catch (error) {
       console.error(error);
       return res.status(401).json({
-        msg: "You do not have permission to make this action",
+        msg: `You do not have permission to make this action ${error.message}`,
       });
     }
   }

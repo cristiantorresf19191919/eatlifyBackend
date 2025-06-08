@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -11,7 +14,7 @@ import categorias from "./routes/categorias";
 import ventas from "./routes/ventas";
 import resturants from "./routes/restaurant";
 import preventas from "./routes/preventa";
-import finalUserRouter from "./routes/finalusers";
+import finalUserRouter from "./routes/finalUsers";
 import { Response, Request } from "express";
 import productosTestRouter from './routes/productosTest';
 import orderRouter from './routes/orders';
@@ -36,7 +39,7 @@ class Server {
     //dataBaseConnection
     new DataBaseConnection();
     //settings
-    this.app.set("port", process.env.PORT || 5000);
+    this.app.set("port", process.env.PORT || 8000);
     //middlewares
     this.app.use(helmet());
     this.app.use(morgan('combined'));
@@ -66,8 +69,9 @@ class Server {
         this.app.use('/categorias', categorias);  */
   }
   public start() {
-    return this.app.listen(this.app.get("port"), () => {
-      console.log("Server on port", this.app.get("port"));      
+    const port = this.app.get("port");
+    return this.app.listen(port, () => {
+      console.log("Server on port 🦾🦾🦾", port);      
     });
   }
   public get appExpress(){

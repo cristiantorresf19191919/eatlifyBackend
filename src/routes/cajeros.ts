@@ -1,9 +1,9 @@
 import { Request, Response, Router, NextFunction } from "express";
-import { CajerosController } from "../controllers/CajerosController";
+import { CashiersController } from "../controllers/CashiersController";
 import { Authenticated } from "../middlewares/authenticated";
 
-class CajerosRoutes {
-  private cajerosController: CajerosController = new CajerosController();
+class CashierRoutes {
+  private cashierController: CashiersController = new CashiersController();
   public authenticated: Authenticated = new Authenticated();
   router: Router;
 
@@ -14,32 +14,32 @@ class CajerosRoutes {
   routes() {
     this.router.post(
       "/registerSuperUser",
-      this.cajerosController.RegistrarCajero
+      this.cashierController.registerMasterUser
     );
-    this.router.post("/loginCajero", this.cajerosController.loginCajero); //middleware
+    this.router.post("/loginCajero", this.cashierController.loginCashier); //middleware
     this.router.post(
       "/agregarCajero",
       this.authenticated.adminAuthenticated,
       this.authenticated.superUserAuthenticated,
-      this.cajerosController.agregarCajero
+      this.cashierController.addCashier
     );
     this.router.delete(
       "/eliminarCajero/:id",
       this.authenticated.adminAuthenticated,
       this.authenticated.superUserAuthenticated,
-      this.cajerosController.eliminarCajero
+      this.cashierController.deleteCashier
     );
     this.router.put(
       "/actualizarCajero/:id",
       this.authenticated.adminAuthenticated,
       this.authenticated.superUserAuthenticated,
-      this.cajerosController.actualizarCajero
+      this.cashierController.updateCashier
     );
-    this.router.get("/verCajero", this.cajerosController.verCajero);
-    this.router.get("/compareEmail", this.cajerosController.compareEmail);
+    this.router.get("/verCajero", this.cashierController.seeCashier);
+    this.router.get("/compareEmail", this.cashierController.compareEmail);
   }
 }
 
-const cajerosRoutes = new CajerosRoutes();
+const cajerosRoutes = new CashierRoutes();
 
 export default cajerosRoutes.router;
