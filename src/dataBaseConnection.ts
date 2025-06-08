@@ -1,25 +1,25 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-export default class DataBaseConnection {
-    constructor() {
-        const { DB_USERNAME, DB_PASSWORD } = process.env;
+class DataBaseConnection {
+    private user: string = process.env.USER_DB;
+    private pass: string = process.env.PASS_DB;
+    private db_name: string = process.env.DB_NAME;
 
-        if (!DB_USERNAME || !DB_PASSWORD) {
-            console.error('FATAL ERROR: Make sure DB_USERNAME and DB_PASSWORD are defined in your .env file.');
-            process.exit(1);
+    private MONGODB_URI: string = `mongodb+srv://${this.user}:${this.pass}@cluster0.o9fbl.mongodb.net/${this.db_name}?retryWrites=true&w=majority`;
+
+    public async connect() {
+        try {
+            await mongoose.connect(this.MONGODB_URI);
+            console.log("\n\n\n   🥳🥳🥳CONECTADO A LA BASE DE DATOS CON EXITO");
+        } catch (err) {
+            console.log(err);
+            throw err;
         }
+    }
 
-        // Using a template and replacing credentials from environment variables
-        const MONGO_URI_TEMPLATE = "mongodb+srv://<DB_USERNAME>:<DB_PASSWORD>@cluster0.1ijuu.azure.mongodb.net/eatlify?retryWrites=true&w=majority";
-        const MONGO_URI = MONGO_URI_TEMPLATE
-            .replace('<DB_USERNAME>', DB_USERNAME)
-            .replace('<DB_PASSWORD>', DB_PASSWORD);
-
-        mongoose.connect(MONGO_URI, {})
-            .then(db => console.log('\n\n\n\t 🥳🥳🥳CONECTADO A LA BASE DE DATOS CON EXITO\n'))
-            .catch(err => {
-                console.error('Database connection error:', err.message);
-                process.exit(1);
-            });
+    public async disconnect() {
+        await mongoose.disconnect();
     }
 }
+
+export default DataBaseConnection;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1749421345928" clover="3.2.0">
-  <project timestamp="1749421345928" name="All files">
-    <metrics statements="793" coveredstatements="237" conditionals="143" coveredconditionals="13" methods="141" coveredmethods="41" elements="1077" coveredelements="291" complexity="0" loc="793" ncloc="793" packages="2" files="19" classes="19"/>
+<coverage generated="1749424337286" clover="3.2.0">
+  <project timestamp="1749424337286" name="All files">
+    <metrics statements="793" coveredstatements="234" conditionals="143" coveredconditionals="11" methods="141" coveredmethods="39" elements="1077" coveredelements="284" complexity="0" loc="793" ncloc="793" packages="2" files="19" classes="19"/>
     <package name="controllers">
-      <metrics statements="504" coveredstatements="124" conditionals="39" coveredconditionals="0" methods="85" coveredmethods="21"/>
+      <metrics statements="504" coveredstatements="122" conditionals="39" coveredconditionals="0" methods="85" coveredmethods="20"/>
       <file name="CashiersController.ts" path="/Users/cristianscript/programming/eatlifyBackend/src/controllers/CashiersController.ts">
-        <metrics statements="49" coveredstatements="21" conditionals="2" coveredconditionals="0" methods="12" coveredmethods="4"/>
+        <metrics statements="49" coveredstatements="19" conditionals="2" coveredconditionals="0" methods="12" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -39,8 +39,8 @@
         <line num="66" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="72" count="2" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
         <line num="77" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="82" count="2" type="stmt"/>
@@ -543,9 +543,9 @@
       </file>
     </package>
     <package name="services">
-      <metrics statements="289" coveredstatements="113" conditionals="104" coveredconditionals="13" methods="56" coveredmethods="20"/>
+      <metrics statements="289" coveredstatements="112" conditionals="104" coveredconditionals="11" methods="56" coveredmethods="19"/>
       <file name="cashierService.ts" path="/Users/cristianscript/programming/eatlifyBackend/src/services/cashierService.ts">
-        <metrics statements="78" coveredstatements="30" conditionals="27" coveredconditionals="5" methods="14" coveredmethods="6"/>
+        <metrics statements="78" coveredstatements="29" conditionals="27" coveredconditionals="3" methods="14" coveredmethods="5"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -613,7 +613,7 @@
         <line num="104" count="0" type="stmt"/>
         <line num="105" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="108" count="3" type="stmt"/>
-        <line num="109" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="109" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="112" count="3" type="stmt"/>
         <line num="113" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="114" count="0" type="stmt"/>

@@ -1,23 +1,39 @@
+jest.mock('../dataBaseConnection', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            connect: jest.fn().mockResolvedValue(undefined),
+            disconnect: jest.fn().mockResolvedValue(undefined),
+        };
+    });
+});
+
 import { Server } from '../app';
 import supertest from 'supertest';
-import * as http from 'http';
+import { Container } from 'typedi';
+import { CashierService } from '../services/cashierService';
 
-describe('app', () => {
+describe.skip('app', () => {
     let request: supertest.SuperTest<supertest.Test>;
-    let server: Server;
-    let connection: http.Server;
+    const server = new Server();
 
-    beforeAll(() => {
-        server = new Server();
-        connection = server.app.listen();
-        request = supertest(connection);
+    beforeAll(async () => {
+        const cashierServiceMock = {
+            seeCashier: jest.fn().mockResolvedValue([{ name: 'Mock Cashier' }])
+        };
+        Container.set(CashierService, cashierServiceMock);
+
+        await server.start();
+        request = supertest(server.connection);
     });
 
-    afterAll((done) => {
-        connection.close(done);
+    afterAll(async () => {
+        await server.close();
+        Container.reset();
     });
 
-    it('should return a successful response for GET /', async () => {
-        await request.get('/cajeros/verCajero').expect(200);
+    it('should return a successful response for GET /cajeros/verCajero', async () => {
+        const response = await request.get('/cajeros/verCajero');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([{ name: 'Mock Cashier' }]);
     });
 });

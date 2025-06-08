@@ -25,9 +25,11 @@ import { Server as HttpServer } from 'http';
 export class Server {
   public app: express.Application;
   public connection: HttpServer;
+  private db: DataBaseConnection;
 
   constructor() {
     this.app = express();
+    this.db = new DataBaseConnection();
     this.config();
     this.routes();
     this.cookies();
@@ -40,16 +42,11 @@ export class Server {
     })
   }
   private config() {
-    //dataBaseConnection
-    new DataBaseConnection();
-    //settings
     this.app.set("port", process.env.PORT || 8000);
-    //middlewares
     this.app.use(helmet());
-    this.app.use(morgan('combined'));
+    this.app.use(morgan('dev'));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    //first score
     this.app.use(cors());
   }
   private routes() {
@@ -65,15 +62,19 @@ export class Server {
     this.app.use("/finalUsers", finalUserRouter);
     this.app.use("/modifier", modifierRouter);
   }
-  public start() {
+  public async start(): Promise<void> {
+    await this.db.connect();
     const port = this.app.get("port");
     this.connection = this.app.listen(port, () => {
       console.log("Server on port 🦾🦾🦾", port);
     });
   }
 
-  public close() {
-    this.connection.close();
+  public async close(): Promise<void> {
+    if (this.connection) {
+      await new Promise<void>(resolve => this.connection.close(() => resolve()));
+    }
+    await this.db.disconnect();
   }
 
   public get appExpress() {
