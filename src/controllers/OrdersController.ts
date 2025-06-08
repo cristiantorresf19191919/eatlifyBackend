@@ -1,101 +1,62 @@
+import { Service } from 'typedi';
 import { Request, Response } from 'express';
-import Orders from '../models/Orders';
+import { OrderService } from '../services/orderService';
+import { IOrders } from '../models/Orders';
 
-
+@Service()
 export class OrdersController {
 
-    async addOrder(req:Request,res:Response){
-        // to do
-        console.log('Header Authorization on add order');
-        console.log(req.headers.authorization);
+    constructor(private readonly orderService: OrderService) { }
+
+    async addOrder(req: Request, res: Response) {
         try {
-            console.log(req.query);
-            const {amount,dateTime,products,imgUrl} = req.body;   
-          
-            const newOrder = new Orders({amount,dateTime,products,imgUrl});
-            if (await newOrder.save()){
-                return res.status(200).json({msg:'order has been created succesfully',order:newOrder});
-            }
-            
+            const newOrder = await this.orderService.addOrder(req.body as IOrders);
+            return res.status(200).json({ msg: 'order has been created succesfully', order: newOrder });
         } catch (error) {
-            console.log('error en la base de datos');
             console.error(error);
-            res.status(500).json({msg:'error in the server sorry', error:error});            
+            res.status(500).json({ msg: 'error in the server sorry', error: error });
         }
     }
 
-
-    async viewOrder(req:Request,res:Response){
-        // to do
+    async viewOrder(req: Request, res: Response) {
         try {
-            const allOrders = await Orders.find({});
-            if (allOrders){
-                return res.status(200).json({
-                    msg:"Orders loaded succesfully :)",
-                    order:allOrders});
-            }
-            
-            
+            const allOrders = await this.orderService.viewOrder();
+            return res.status(200).json({
+                msg: "Orders loaded succesfully :)",
+                order: allOrders
+            });
         } catch (error) {
-            console.log('error en la base de datos');
             console.error(error);
-            res.status(500).json({msg:'error del servidor', error:error});   
-            
+            res.status(500).json({ msg: 'error del servidor', error: error });
         }
     }
-    async viewOrderById(req:Request,res:Response){
-        // to do
+    async viewOrderById(req: Request, res: Response) {
         try {
-            const order = await Orders.findById(req.params.id);
-            if (order){
-                return res.status(200).json({msg:"order found succesfully",order});
-
-            } else {
-                return res.status(404).json({msg:"order not found in db"});
-            }
-            
+            const order = await this.orderService.viewOrderById(req.params.id);
+            return res.status(200).json({ msg: "order found succesfully", order });
         } catch (error) {
-            console.log('error en la base de datos');
-            console.error(error);
-            res.status(500).json({msg:'sorry server error :(', error:error});   
-            
+            return res.status(404).json({ msg: error.message });
         }
     }
 
-
-    async updateOrder(req:Request,res:Response){
-        // to do
+    async updateOrder(req: Request, res: Response) {
         try {
-            const {price,description,title,imageUrl,isFavorite} = req.body;
-
-          
-
-            
+            const result = await this.orderService.updateOrder(req.params.id, req.body as IOrders);
+            return res.status(200).json(result);
         } catch (error) {
-            console.log('error en la base de datos');
             console.error(error);
-            res.status(500).json({msg:'sorry server error :(', error:error});   
+            res.status(500).json({ msg: 'sorry server error :(', error: error });
         }
     }
 
-
-    async deleteOrder(req:Request,res:Response){
-        // to do
+    async deleteOrder(req: Request, res: Response) {
         try {
-            const order = await Orders.findByIdAndRemove(req.params.id);
-            if (order){
-                return res.status(200).json({msg:"order deleted succesfully"});
-
-            }
+            await this.orderService.deleteOrder(req.params.id);
+            return res.status(200).json({ msg: "order deleted succesfully" });
         } catch (error) {
-            console.log('error en la base de datos');
             console.error(error);
-            res.status(500).json({msg:'sorry server error :(', error:error});      
-            
+            res.status(500).json({ msg: 'sorry server error :(', error: error });
         }
     }
-
-
-
 }
 

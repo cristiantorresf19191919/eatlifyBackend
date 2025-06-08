@@ -1,14 +1,20 @@
 import {Server} from 'socket.io';
 
 export default class SocketMain{
-    constructor(argumentoListen){
-        const io = new Server(argumentoListen);
+    constructor(app){
+        const io = new Server(app, {
+          cors: {
+            origin: '*',
+            methods: ['GET', 'POST'],
+          },
+          allowEIO3: true,
+        });
         // io.set('origins', '*:*');
         const documents = {};
 
         io.on('connection', (socket) => {
           let previousIdR;
-          socket.emit("connectionSuccesfully",{msg:'hola'});       
+          socket.emit("connectionSuccesfully",{msg:'hola'});
           const safeJoinRoom = (roomId) => {
             socket.leave(previousIdR);
             /* Join a room all socket.emit functions will only in the room*/
@@ -30,7 +36,7 @@ export default class SocketMain{
             console.log(item);
             // io.sockets.emit('nuevaVenta',item);
             io.to(userId).emit('nuevaVenta',item);
-                                     
+
           });
 
           socket.on("joinAroom",(userId)=>{
@@ -40,29 +46,29 @@ export default class SocketMain{
           socket.on("deleteSaleFromResumen",(item) =>{
             console.log("deleteSaleFromResumen");
             io.sockets.emit('deletedSale', item);
-        });          
+        });
           socket.on('clearTheScreen', (something)=>{
             console.log(something);
             socket.emit('clearTheScreenNow', something);
           });
-          
+
           socket.on('NewSale', (item)=>{
             console.log(' Socket on evento disparado');
             console.log(item);
             io.sockets.emit('nuevaVenta', item);
             });
-      
+
           socket.on('DeleteSale', (item)=>{
             console.log('borra venta evento');
             socket.emit('deletedSale', item);
           });
-      
+
           socket.on('openCASH', (item)=>{
             console.log('cliente disparon un evento socket on item igual a '+item);
             socket.emit('clientEvent', item);
           });
-      
-      
+
+
           /* TODO ESTE BLOQUE ES DEL EJEMPLO DE SOCKET CON DOCUMENTOS */
           /* TODO ESTE BLOQUE ES DEL EJEMPLO DE SOCKET CON DOCUMENTOS */
           /* TODO ESTE BLOQUE ES DEL EJEMPLO DE SOCKET CON DOCUMENTOS */
@@ -83,7 +89,7 @@ export default class SocketMain{
             /* Emit the stored document back to the initiatins client only */
             socket.emit('document', documents[docId]);
           });
-          /* they payload is 
+          /* they payload is
           a document object of an id generetad by the client */
           socket.on('addDoc', (doc) => {
             documents[doc.id] = doc;

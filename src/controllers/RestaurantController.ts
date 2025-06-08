@@ -1,3 +1,4 @@
+import { Service } from 'typedi';
 import { Request, Response } from "express";
 import {RestaurantService} from "../services/restaurantService"
 import Restaurant, { IRestaurant } from "../models/Restaurantes";
@@ -11,17 +12,17 @@ export interface RequestModified {
 
   }
 }
-type RequestPersonalized = Request & TokenRequest;
 
+@Service()
 export class RestaurantController {
 
-  private restaurantService: RestaurantService =  new RestaurantService();
+  constructor(private readonly restaurantService: RestaurantService) {}
 
-  async login(req: RequestPersonalized, res: Response){
-    return res.status(200).json(this.restaurantService.login(res,req.body as IRestaurant));
+  async login(req: Request, res: Response){
+    return this.restaurantService.login(res,req.body as IRestaurant);
   }
 
-  async uploadPic(req: RequestPersonalized, res: Response) {
+  async uploadPic(req: Request, res: Response) {
     const {productId} = req.params;
     if (!productId) return res.status(400).send('productId is required');
     try {
@@ -48,7 +49,7 @@ export class RestaurantController {
 
 
 
-  async getAllRestaurants(req: RequestPersonalized, res: Response) {
+  async getAllRestaurants(req: Request, res: Response) {
     try {
       // iode deusuario autenticado
       let user_id = req.user.id;
@@ -65,7 +66,7 @@ export class RestaurantController {
     }
   }
 
-  async saveRestaurant(req: RequestPersonalized, res: Response) {
+  async saveRestaurant(req: Request, res: Response) {
     try {
 
       let a :IRestaurant;
@@ -105,7 +106,7 @@ export class RestaurantController {
     }
   }
 
-  async updateRestaurant(req: RequestPersonalized, res: Response) {
+  async updateRestaurant(req: Request, res: Response) {
     try {
       const { name, address, description, phone } = req.body;
       // el backend recive el id del post

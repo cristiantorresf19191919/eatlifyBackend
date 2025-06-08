@@ -1,5 +1,7 @@
-import { Response, Request, NextFunction } from "express";
-import Product from "../models/Productos";
+import { Service } from 'typedi';
+import { Response, Request } from "express";
+import { DeliveryService } from '../services/deliveryService';
+import { IProductos } from '../models/Productos';
 
 export interface RequestModified {  
   file?:{
@@ -9,23 +11,18 @@ export interface RequestModified {
   }
 }
 export type RequestPersonalized = Request & RequestModified;
+@Service()
 export class DeliveryController {
-  async uploadPic(req: RequestPersonalized, res: Response) {
-    console.log('upload pic');
-    console.log(req.file);
+
+  constructor(private readonly deliveryService: DeliveryService) { }
+
+  async uploadPic(req: Request, res: Response) {
     try {
-      console.log('llego el archivo que queria si o no carajo');
-      console.log(req.file);
       const imageCloud = {
         url: req.file.path,
         id: req.file.filename,
       };
-      /* return updated item {"new":true} */
-      const product = await Product.findByIdAndUpdate(
-        req.params.productId,
-        { $set: { image: imageCloud } },
-        { new: true }
-      );
+      const product = await this.deliveryService.uploadPic(req.params.productId, imageCloud);
       if (product) return res.status(202).json(product);
     } catch (error) {
       console.error(error.message);
@@ -35,9 +32,7 @@ export class DeliveryController {
 
   async verBakery(req: Request, res: Response) {
     try {
-      const consulta = await Product.find({
-        category: req.params.category,
-      });
+      const consulta = await this.deliveryService.verBakery(req.params.category);
       return res.status(202).json(consulta);
     } catch (error) {
       console.error(error.message);
@@ -47,49 +42,25 @@ export class DeliveryController {
 
   async agregarProducto(req: Request, res: Response) {
     try {
-      const { name, price, description, category } = req.body;
-      const yaexisteproducto = await Product.findOne({
-        name: name,
-      });
-      if (!price || !description || !category)
-        return res
-          .status(404)
-          .json({ msg: "te falto llenar todos los campos del producto" });
-      if (yaexisteproducto)
-        return res.status(404).json({ msg: "el producto ya existe" });
-      const product = new Product({ name, price, description, category });
-      const exito = await product.save();
+      const exito = await this.deliveryService.agregarProducto(req.body as IProductos);
       if (exito) res.status(200).json(exito);
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("server error");
+      res.status(400).json({ msg: error.message });
     }
   }
 
   async eliminarProducto(req: Request, res: Response) {
     try {
-      const product = await Product.findById(req.params.id);
-      if (!product) {
-        return res.status(401).json({ msg: "Product not found" });
-      }
-      // remove product by id
-      await product.remove();
+      const product = await this.deliveryService.eliminarProducto(req.params.id);
       res.json(product);
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("server error");
+      res.status(401).json({ msg: error.message });
     }
   }
 
   async actualizarProducto(req: Request, res: Response) {
     try {
-      const { name, price, description, category } = req.body;
-      const product = await Product.findById(req.params.id);
-      product.name = name;
-      product.price = price;
-      product.description = description;
-      product.category = category;
-      await product.save();
+      const product = await this.deliveryService.actualizarProducto(req.params.id, req.body as IProductos);
       res.json(product);
     } catch (error) {
       console.error(error.message);
@@ -99,7 +70,7 @@ export class DeliveryController {
 
   async verProducto(req: Request, res: Response) {
     try {
-      const productos = await Product.find().sort({ data: -1 });
+      const productos = await this.deliveryService.verProducto();
       res.json(productos);
     } catch (error) {
       console.error(error.message);

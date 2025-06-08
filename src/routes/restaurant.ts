@@ -1,3 +1,4 @@
+import Container from '../container';
 import { Request, Response, Router, NextFunction } from "express";
 import { CashiersController } from "../controllers/CashiersController";
 import { Authenticated } from "../middlewares/authenticated";
@@ -8,13 +9,12 @@ import multer from "multer";
 
 
 class RestaurantRoute {
-  private restaurantController: RestaurantController = new RestaurantController();
   public seguridad: Authenticated = new Authenticated();
   router: Router;
   public parser:any;
 
   public cloudinary = Cloudinary;
-  constructor() {
+  constructor(private readonly restaurantController: RestaurantController) {
     this.router = Router();
     this.configCloduinary();
     this.routes();
@@ -45,7 +45,7 @@ class RestaurantRoute {
     );
     this.router.post(
       "/login",
-      this.restaurantController.login
+      this.restaurantController.login.bind(this.restaurantController)
     );
     this.router.post(
       "/uploadPic/:productId",
@@ -65,13 +65,14 @@ class RestaurantRoute {
       this.seguridad.adminAuthenticated,
       this.seguridad.isadmin,
       this.seguridad.isadmin,
-      this.restaurantController.updateRestaurant
+      this.restaurantController.updateRestaurant.bind(this.restaurantController)
     );
     this.router.get(
         "/",
         this.seguridad.adminAuthenticated,
-        this.restaurantController.getAllRestaurants);
+        this.restaurantController.getAllRestaurants.bind(this.restaurantController));
   }
 }
-const restaurantRoute: RestaurantRoute = new RestaurantRoute();
+const restaurantController = Container.get(RestaurantController);
+const restaurantRoute: RestaurantRoute = new RestaurantRoute(restaurantController);
 export default restaurantRoute.router;

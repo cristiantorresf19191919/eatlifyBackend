@@ -10,6 +10,7 @@
       "baseUrl": ".",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
+      "typeRoots": ["./node_modules/@types", "./global.d.ts"],
     //   "types": ["node", "express","socket.io"],
       "plugins": [
         {
@@ -27,6 +28,7 @@
       }
   },
   "include": [
-      "src/**/*"
+      "src/**/*",
+      "global.d.ts"
   ]
 }

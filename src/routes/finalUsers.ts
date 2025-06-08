@@ -1,45 +1,43 @@
+import Container from '../container';
 import { Router } from "express";
-import { CategoriasController } from "../controllers/CategoriasController";
 import { FinalUsersController } from "../controllers/FinalUsersController";
-import { Authenticated } from '../middlewares/authenticated';
 
 class FinalUserRouter {
-  private finalUserController:FinalUsersController = new FinalUsersController();
-
   router: Router;
-  constructor() {
+  constructor(private readonly finalUserController: FinalUsersController) {
     this.router = Router();
     this.routes();
   }
 
   routes() {
     this.router.post(
-      "/",    
-      this.finalUserController.addFinalUser
+      "/",
+      this.finalUserController.addFinalUser.bind(this.finalUserController)
     );
     this.router.post(
-        "/login",
-        this.finalUserController.loginFinalUser
+      "/login",
+      this.finalUserController.loginFinalUser.bind(this.finalUserController)
     );
     this.router.get(
       "/",
-      this.finalUserController.viewAllUsers
+      this.finalUserController.viewAllUsers.bind(this.finalUserController)
     );
     this.router.get(
       "/:id",
-      this.finalUserController.viewFinalUserbyId
+      this.finalUserController.viewFinalUserbyId.bind(this.finalUserController)
     );
     this.router.delete(
       "/:id",
-      this.finalUserController.deleteFinalUser
+      this.finalUserController.deleteFinalUser.bind(this.finalUserController)
     );
     this.router.put(
       "/:id",
-      this.finalUserController.updateFinalUser
+      this.finalUserController.updateFinalUser.bind(this.finalUserController)
     );
-   
+
   }
 }
 
-const finalUserRouter = new FinalUserRouter();
+const finalUserController = Container.get(FinalUsersController);
+const finalUserRouter = new FinalUserRouter(finalUserController);
 export default finalUserRouter.router;

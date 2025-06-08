@@ -1,28 +1,24 @@
-
+import Container from '../container';
 import { Router } from 'express';
 import { OrdersController } from '../controllers/OrdersController';
 
 class OrderRoutes {
-    private orderController:OrdersController = new OrdersController;
+    router: Router;
 
-    router:Router;
-
-    constructor(){
+    constructor(private readonly orderController: OrdersController) {
         this.router = Router();
         this.routes();
-
     }
 
-    routes(){
-        this.router.post("/",this.orderController.addOrder);
-        this.router.get("/",this.orderController.viewOrder);
-        this.router.get("/:id",this.orderController.viewOrderById);
-        this.router.put("/:id",this.orderController.updateOrder);
-        this.router.delete("/:id",this.orderController.deleteOrder);
-        
+    routes() {
+        this.router.post("/", this.orderController.addOrder.bind(this.orderController));
+        this.router.get("/", this.orderController.viewOrder.bind(this.orderController));
+        this.router.get("/:id", this.orderController.viewOrderById.bind(this.orderController));
+        this.router.put("/:id", this.orderController.updateOrder.bind(this.orderController));
+        this.router.delete("/:id", this.orderController.deleteOrder.bind(this.orderController));
     }
-
 }
 
-const orderRouter:OrderRoutes = new OrderRoutes();
-    export default orderRouter.router;
+const orderController = Container.get(OrdersController);
+const orderRouter: OrderRoutes = new OrderRoutes(orderController);
+export default orderRouter.router;

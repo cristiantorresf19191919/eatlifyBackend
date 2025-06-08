@@ -1,5 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import { Request, Response, Router, NextFunction } from "express";
+import 'reflect-metadata';
+import { Service } from 'typedi';
 
 const customResponses =  {
     'invalidPass':'Contraseña Incorrecta',
@@ -10,6 +12,7 @@ const customResponses =  {
 
 export type ResponseStr = keyof typeof customResponses;
 
+@Service()
 export class CommonServices {
 
  handleJWT(payload, expiresIn = 240){

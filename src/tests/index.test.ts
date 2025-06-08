@@ -1,14 +1,23 @@
-
-import { app } from '../app';
+import { Server } from '../app';
 import supertest from 'supertest';
+import * as http from 'http';
 
 describe('app', () => {
-  let request;
-  beforeEach(() => {
-    request = supertest(app);
-  });
-  it('should return a successful response for GET /', done => {
-    request.get('/cajeros/verCajero')
-      .expect(200, done);
-  });
+    let request: supertest.SuperTest<supertest.Test>;
+    let server: Server;
+    let connection: http.Server;
+
+    beforeAll(() => {
+        server = new Server();
+        connection = server.app.listen();
+        request = supertest(connection);
+    });
+
+    afterAll((done) => {
+        connection.close(done);
+    });
+
+    it('should return a successful response for GET /', async () => {
+        await request.get('/cajeros/verCajero').expect(200);
+    });
 });

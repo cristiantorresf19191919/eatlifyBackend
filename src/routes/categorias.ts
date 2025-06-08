@@ -1,12 +1,12 @@
+import Container from '../container';
 import { Router } from "express";
 import { CategoriasController } from "../controllers/CategoriasController";
 import { Authenticated } from '../middlewares/authenticated';
 
 class CategoriaRouter {
-  private categoriasController:CategoriasController = new CategoriasController();
   private seguridad:Authenticated = new Authenticated();
   router: Router;
-  constructor() {
+  constructor(private readonly categoriasController: CategoriasController) {
     this.router = Router();
     this.routes();
   }
@@ -15,25 +15,26 @@ class CategoriaRouter {
     this.router.get(
       "/",
       this.seguridad.adminAuthenticated,
-      this.categoriasController.getCategorias
+      this.categoriasController.getCategorias.bind(this.categoriasController)
     );
     this.router.post(
       "/",
       this.seguridad.adminAuthenticated,
-      this.categoriasController.postCategorias
+      this.categoriasController.postCategorias.bind(this.categoriasController)
     );
     this.router.delete(
       "/:id",
       this.seguridad.adminAuthenticated,
-      this.categoriasController.deleteCategorias
+      this.categoriasController.deleteCategorias.bind(this.categoriasController)
     );
     this.router.put(
       "/:id",
       this.seguridad.adminAuthenticated,
-      this.categoriasController.UpdateCategorias
+      this.categoriasController.UpdateCategorias.bind(this.categoriasController)
     );
   }
 }
 
-const categoriasRouter = new CategoriaRouter();
+const categoriasController = Container.get(CategoriasController);
+const categoriasRouter = new CategoriaRouter(categoriasController);
 export default categoriasRouter.router;

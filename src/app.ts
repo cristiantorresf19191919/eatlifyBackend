@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,17 +20,20 @@ import { Response, Request } from "express";
 import productosTestRouter from './routes/productosTest';
 import orderRouter from './routes/orders';
 import modifierRouter from './routes/modifiergroups'
+import { Server as HttpServer } from 'http';
 
-class Server {
+export class Server {
   public app: express.Application;
+  public connection: HttpServer;
+
   constructor() {
     this.app = express();
     this.config();
     this.routes();
     this.cookies();
   }
-  private cookies(){
-    this.app.post('/cookies',(req:Request,res:Response)=>{
+  private cookies() {
+    this.app.post('/cookies', (req: Request, res: Response) => {
       const tokenRecivido = req.body;
       console.log('token recivido es');
       console.log(tokenRecivido);
@@ -48,43 +52,34 @@ class Server {
     //first score
     this.app.use(cors());
   }
-  private routes() {    
+  private routes() {
     this.app.use("/cajeros", cajeros);
     this.app.use("/products", productos);
-    this.app.use("/deliver",delivery);
-    this.app.use("/categorias",categorias);
-    this.app.use("/preventas",preventas);
-    this.app.use("/ventas",ventas);
-    this.app.use('/restaurants',resturants);
-    this.app.use("/productosTest",productosTestRouter);
-    this.app.use("/orders",orderRouter);
-    this.app.use("/finalUsers",finalUserRouter);
-    // this.app.use("/modifier",modifierRouter);
-    
-    /*     this.app.use('/deliver', deliver);
-        this.app.use('/products', products);
-        this.app.use('/ventas', ventas);
-        this.app.use('/deleteReports', deleteReports);
-        this.app.use('/preventas', preventa);
-        this.app.use('/categorias', categorias);  */
+    this.app.use("/deliver", delivery);
+    this.app.use("/categorias", categorias);
+    this.app.use("/preventas", preventas);
+    this.app.use("/ventas", ventas);
+    this.app.use('/restaurants', resturants);
+    this.app.use("/productosTest", productosTestRouter);
+    this.app.use("/orders", orderRouter);
+    this.app.use("/finalUsers", finalUserRouter);
+    this.app.use("/modifier", modifierRouter);
   }
   public start() {
     const port = this.app.get("port");
-    return this.app.listen(port, () => {
-      console.log("Server on port 🦾🦾🦾", port);      
+    this.connection = this.app.listen(port, () => {
+      console.log("Server on port 🦾🦾🦾", port);
     });
   }
-  public get appExpress(){
+
+  public close() {
+    this.connection.close();
+  }
+
+  public get appExpress() {
     return this.app;
   }
 }
-const server: Server = new Server();
-export const app  = server.start();
-new SocketMain(app);
-// export const app = server.appExpress;
-
-
-
 
 /**
  * Webpack HMR Activation test test change

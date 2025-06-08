@@ -1,17 +1,15 @@
-import Categorias from "../models/Categorias";
-import Product from "../models/Productos";
+import { Service } from 'typedi';
 import { Response, Request } from "express";
-import { TokenRequest } from "./TokenRequestInterface";
-type RequestPersonalized = Request & TokenRequest;
+import { CategoriasService } from '../services/categoriasService';
+
+@Service()
 export class CategoriasController {
 
-  
-  
+  constructor(private readonly categoriasService: CategoriasService) { }
 
-  async getCategorias(req: RequestPersonalized, res: Response) {
+  async getCategorias(req: Request, res: Response) {
     try {
-      const allCats = await Categorias.find({user:req.user.id});
-      console.log(allCats);
+      const allCats = await this.categoriasService.getCategorias(req.user.id);
       if (allCats) {
         return res.json(allCats).status(200);
       }
@@ -20,71 +18,33 @@ export class CategoriasController {
     }
   }
 
-    async postCategorias(req: RequestPersonalized, res: Response) {
+  async postCategorias(req: Request, res: Response) {
     let { name, taxable } = req.body;
-    if (!taxable) taxable = false;
     try {
-      const categoria = await Categorias.findOne({ name: name, user:req.user.id});
-      if (categoria) {
-        return res.status(400).send("La categoria ya existe");
-      }
-      console.log(taxable);
-      const newCategoria = await new Categorias({ name, taxable, user:req.user.id });
-      newCategoria.save();
+      const newCategoria = await this.categoriasService.postCategorias(name, taxable, req.user.id);
       return res.status(200).json(newCategoria);
     } catch (error) {
-      return res.status(500).send("error del servidor");
+      return res.status(400).send(error.message);
     }
   };
 
-    async deleteCategorias(req: RequestPersonalized, res: Response) {
+  async deleteCategorias(req: Request, res: Response) {
     try {
-      // .save se utiliza cuando se cambia una propiedad dentro de la coleccion
-      const categoria = await Categorias.findById(req.params.id);
-      if (categoria) {
-        const todosProductos = await Product.find();
-        // todos los productos diferentes a la categoria que se va a borrar
-        const newArray = todosProductos.filter((prod) => {
-          return prod.category !== categoria.name;
-        });
-        await Product.deleteMany({});
-        // insertar un arreglo a una collecion
-        await Product.insertMany(newArray);
-        await categoria.remove();
-        return res.status(200).json(categoria);
-      } else {
-        return res.status(404).send("categoria no encontrada");
-      }
-    } catch (error) {
-      return res.status(500).send("error del servidor");
-    }
-  };
-
-   async UpdateCategorias(req: RequestPersonalized, res: Response) {
-    try {
-      // el ide de la categoria en req.params.id
-      // encuentra la categoria para actualizar
-      const categoria = await Categorias.findById(req.params.id);
-      // todos los productos que contienen esa categoria
-      const productos = await Product.find({ category: categoria.name });
-      const categoriaAntigua = categoria.name;
-      // nuevo nombre que se le va a dar a la categoria.
-      const { name } = req.body;
-      categoria.name = name;
-      // cambiar la categoria de los productos a la nueva categoria
-      const actualizadosProductos = productos.map((prod) => {
-        return { ...prod, category: categoria.name };
-      });
-      await Product.updateMany(
-        { category: categoriaAntigua },
-        { $set: { category: name } }
-      );
-
-      // save solo se usa cuando se actualiza una de sus propiedades del objeto schema
-      await categoria.save();
+      const categoria = await this.categoriasService.deleteCategorias(req.params.id);
       return res.status(200).json(categoria);
     } catch (error) {
-      return res.status(500).send("error del servidor");
+      return res.status(404).send(error.message);
+    }
+  };
+
+  async UpdateCategorias(req: Request, res: Response) {
+    try {
+      const { name } = req.body;
+      const categoria = await this.categoriasService.updateCategorias(req.params.id, name);
+      return res.status(200).json(categoria);
+    } catch (error) {
+      return res.status(500).send(error.message);
     }
   };
 }
+
