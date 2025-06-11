@@ -1,25 +1,33 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 class DataBaseConnection {
-    private user: string = process.env.USER_DB;
-    private pass: string = process.env.PASS_DB;
-    private db_name: string = process.env.DB_NAME;
+  private uri: string = process.env.MONGO_URI!;
 
-    private MONGODB_URI: string = `mongodb+srv://${this.user}:${this.pass}@cluster0.o9fbl.mongodb.net/${this.db_name}?retryWrites=true&w=majority`;
-
-    public async connect() {
-        try {
-            await mongoose.connect(this.MONGODB_URI);
-            console.log("\n\n\n   🥳🥳🥳CONECTADO A LA BASE DE DATOS CON EXITO");
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
+  public async connect() {
+    if (!this.uri) {
+      throw new Error('MONGO_URI environment variable is not set');
     }
 
-    public async disconnect() {
-        await mongoose.disconnect();
+    if (!process.env.DB_USERNAME || !process.env.DB_PASSWORD) {
+      throw new Error(
+        'DB_USERNAME or DB_PASSWORD environment variables are not set'
+      );
     }
+
+    const connectionUri = this.uri
+      .replace('<db_username>', process.env.DB_USERNAME!)
+      .replace('<db_password>', process.env.DB_PASSWORD!);
+
+    await mongoose.connect(connectionUri);
+    console.log('🥳 Connected to database successfully');
+  }
+
+  public async disconnect() {
+    await mongoose.disconnect();
+  }
 }
 
 export default DataBaseConnection;

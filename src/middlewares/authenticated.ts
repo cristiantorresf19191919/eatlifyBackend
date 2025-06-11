@@ -39,7 +39,7 @@ export class Authenticated {
     }
     // Verificar Token
     try {
-      const clave = "secretTokenScriptEncription";
+      const clave = process.env.SECRET;
       const decoded = jwt.verify(token, clave);
       req.user = decoded.user;
       console.log("mirando token decoded");
@@ -52,7 +52,7 @@ export class Authenticated {
     } catch (err) {
       console.log("no es super usuario");
       res.status(401).json({
-        msg: "you are not SuperUser",
+        msg: `you are not SuperUser ${err.message}`,
       });
     }
   }
