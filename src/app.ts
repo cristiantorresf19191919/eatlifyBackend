@@ -47,14 +47,20 @@ export class Server {
     this.app.use(morgan('dev'));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(cors({
-      origin: ['https://eatlify.netlify.app', 'http://localhost:3000', 'http://localhost:5173'],
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token']
-    }));
-    // Explicitly handle all OPTIONS preflight requests
-    this.app.options('*', cors());
+    const corsOptions = {
+  origin: [
+    'https://eatlify.netlify.app',
+    'http://localhost:3000',
+    'http://localhost:5173'
+  ],
+    credentials: true,
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization,x-auth-token'
+  }
+
+this.app.use(cors(corsOptions))
+this.app.options('*', cors(corsOptions))
+   
   }
   private routes() {
     this.app.use("/cajeros", cajeros);

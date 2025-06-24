@@ -65,8 +65,10 @@ export class CashierService {
 
     public async loginCashier(cajeroData: IUser) {
         const { email, password } = cajeroData;
+        console.log(email, password);
         const cajero = await Cajero.findOne({ email });
-
+        
+        if (!cajero) return null;
         if (!cajero) throw new Error('usuario no se encuentra en la base de datos');
         const match = await bcrypt.compare(password, cajero.password);
         if (match) { 

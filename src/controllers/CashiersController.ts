@@ -51,6 +51,9 @@ export class CashiersController {
   public async loginCashier(req: Request, res: Response) {
     try {
       const result = await this.cashierService.loginCashier(req.body as IUser);
+      if (!result) {
+        return res.status(400).json({ msg: `usuario con correo ${req.body.email} no se encuentra en la base de datos` });
+      }
       return res.status(200).json(result);
     } catch (error) {
       console.error(error.message);
