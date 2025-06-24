@@ -53,6 +53,8 @@ export class Server {
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token']
     }));
+    // Explicitly handle all OPTIONS preflight requests
+    this.app.options('*', cors());
   }
   private routes() {
     this.app.use("/cajeros", cajeros);
