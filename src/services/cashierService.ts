@@ -68,8 +68,7 @@ export class CashierService {
         console.log(email, password);
         const cajero = await Cajero.findOne({ email });
         
-        if (!cajero) return null;
-        if (!cajero) throw new Error('usuario no se encuentra en la base de datos');
+        if (!cajero) return null;       
         const match = await bcrypt.compare(password, cajero.password);
         if (match) { 
             const user = {

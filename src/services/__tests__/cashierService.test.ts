@@ -55,11 +55,12 @@ describe('CashierService', () => {
             });
         });
 
-        it('should throw an error for non-existent user', async () => {
+        it('should return null for non-existent user', async () => {
             const cashierBody = { email: 'nonexistent@test.com', password: 'password123' };
             (Cajero.findOne as jest.Mock).mockResolvedValue(null);
 
-            await expect(cashierService.loginCashier(cashierBody as any)).rejects.toThrow('usuario no se encuentra en la base de datos');
+            const result = await cashierService.loginCashier(cashierBody as any);
+            expect(result).toBeNull();
         });
 
         it('should throw an error for invalid password', async () => {
