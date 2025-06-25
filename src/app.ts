@@ -21,6 +21,7 @@ import productosTestRouter from './routes/productosTest';
 import orderRouter from './routes/orders';
 import modifierRouter from './routes/modifiergroups'
 import { Server as HttpServer } from 'http';
+import path from 'path';
 
 export class Server {
   public app: express.Application;
@@ -58,8 +59,8 @@ export class Server {
     allowedHeaders: 'Content-Type,Authorization,x-auth-token'
   }
 
-this.app.use(cors(corsOptions))
-this.app.options('*', cors(corsOptions))
+  this.app.use(cors(corsOptions))
+  this.app.options('*', cors(corsOptions))
    
   }
   private routes() {
@@ -74,10 +75,15 @@ this.app.options('*', cors(corsOptions))
     this.app.use("/orders", orderRouter);
     this.app.use("/finalUsers", finalUserRouter);
     this.app.use("/modifier", modifierRouter);
+    //check if the server is running by rendering html page
+    this.app.get('/', (req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    });
   }
   public async start(): Promise<void> {
     await this.db.connect();
     const port = this.app.get("port");
+    console.log('Attempting to start server on port', port);
     this.connection = this.app.listen(port, () => {
       console.log("Server on port 🦾🦾🦾", port);
     });
