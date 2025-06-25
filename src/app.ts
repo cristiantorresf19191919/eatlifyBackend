@@ -48,6 +48,10 @@ export class Server {
     this.app.use(morgan('dev'));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    
+    // Serve static files from public directory
+    this.app.use(express.static(path.join(__dirname, 'public')));
+    
     const corsOptions = {
   origin: [
     'https://eatlify.netlify.app',
