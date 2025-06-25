@@ -22,6 +22,7 @@ import orderRouter from './routes/orders';
 import modifierRouter from './routes/modifiergroups'
 import { Server as HttpServer } from 'http';
 import path from 'path';
+import { setupSwagger } from './config/swagger';
 
 export class Server {
   public app: express.Application;
@@ -79,6 +80,10 @@ export class Server {
     this.app.use("/orders", orderRouter);
     this.app.use("/finalUsers", finalUserRouter);
     this.app.use("/modifier", modifierRouter);
+    
+    // Setup Swagger documentation
+    setupSwagger(this.app);
+    
     //check if the server is running by rendering html page
     this.app.get('/', (req: Request, res: Response) => {
       res.sendFile(path.join(__dirname, 'public', 'index.html'));
