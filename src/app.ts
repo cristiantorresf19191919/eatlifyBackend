@@ -54,18 +54,14 @@ export class Server {
     this.app.use(express.static(path.join(__dirname, 'public')));
     
     const corsOptions = {
-  origin: [
-    'https://eatlify.netlify.app',
-    'http://localhost:3000',
-    'http://localhost:5173'
-  ],
-    credentials: true,
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type,Authorization,x-auth-token'
-  }
+      origin: '*',
+      credentials: true,
+      methods: 'GET,POST,PUT,DELETE,OPTIONS',
+      allowedHeaders: 'Content-Type,Authorization,x-auth-token'
+    }
 
-  this.app.use(cors(corsOptions))
-  this.app.options('*', cors(corsOptions))
+    this.app.use(cors(corsOptions))
+    this.app.options('*', cors(corsOptions))
    
   }
   private routes() {
